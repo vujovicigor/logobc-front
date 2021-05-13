@@ -1,38 +1,39 @@
 
 <script>
-    import { session } from '$lib/store/session.js'
-    import { fetch2 } from '$lib/fetch2.js'
-    import Toast from '$lib/toast.js'
-    import { goto } from '$app/navigation';
-    const toast = new Toast({duration:2000}) 
-  
-    let obj = {
-      email:'vujovichigor@gmail.com',
-      password:''
-    }
-  
-    if ($session.token && $session.isLogedIn){
-      toast.success('Welcome back');
-    }
-  
-    async function tryLogin(){
-      var [resp,err] = await fetch2('post','auth', obj)
-      if (!resp || !resp.token) { toast.error('Wrong credentials'); return }
-      toast.success('Welcome'); 
-      $session = { ...resp.results, isLogedIn:true, token:resp.token }
-      goto('/')
-    }
-  
-      function handleKeydown(event) {
-      if (event.key == 'Enter') tryLogin()
-      }
-  </script>
-  
+  import { session } from '$lib/store/session.js'
+  import { fetch2 } from '$lib/fetch2.js'
+  import Toast from '$lib/toast.js'
+  import { goto } from '$app/navigation';
+  const toast = new Toast({duration:2000}) 
+  let loading = false
+  let obj = {
+    email:'vujovichigor@gmail.com',
+    password:''
+  }
+
+  $:if ($session.token && $session.isLogedIn){
+    goto('/')
+    //toast.success('Welcome back');
+  }
+
+  async function tryLogin(){
+    loading = true
+    var [resp,err] = await fetch2('post','auth', obj)
+    loading = false
+    if (!resp || !resp.token) { toast.error('Wrong credentials'); return }
+    toast.success('Welcome'); 
+    $session = { ...resp.results, isLogedIn:true, token:resp.token }
+  }
+
+  function handleKeydown(event) {
+    if (event.key == 'Enter') tryLogin()
+  }
+</script>
   <svelte:window on:keydown={handleKeydown}/>
-  
   <div class="jumbotron jumbotron-fluid">
     <div class="container" style="max-width: 30rem !important">
-      <h1 class="mb-3 text-center">Please log in</h1>
+      <img class="img-fluid mx-auto d-block" style="margin-bottom: 9rem!important; max-width: 13rem;" src="/images/logo-logo.png" alt="logo">
+<!--      <h1 class="mb-3 text-center">Please log in</h1> -->
 
       <div class="form-floating mb-3">
         <input bind:value={obj.email} type="email" class="form-control" id="floatingInput" placeholder="email">
@@ -43,8 +44,11 @@
           <label for="floatingPassword">Password</label>
       </div>
 
-      <button type="button" on:click={tryLogin} class="btn btn-primary btn-block mt-5">
-        Login
+      <button disabled ={loading} type="button" on:click={tryLogin} class="btn btn-primary btn-block d-block mx-auto mt-5">
+        {#if loading}
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        {/if}
+        Prijavi se
       </button>      
 
           <!--

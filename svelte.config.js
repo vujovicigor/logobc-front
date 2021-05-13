@@ -1,6 +1,6 @@
-//const adapter = require('@sveltejs/adapter-static');
-import  adapter  from '@sveltejs/adapter-static'
-//console.log('adapter', adapter)
+//import  adapter  from '@sveltejs/adapter-static'
+import vercel from '@sveltejs/adapter-vercel';
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	kit: {
@@ -8,9 +8,8 @@ const config = {
 		target: '#svelte',
 		//hydrate: false,
 		ssr:false,
-		adapter: adapter({
-			fallback: '200.html'
-		}),
+		//adapter: adapter({fallback: '200.html'}),
+		adapter: vercel(),
 		prerender: {
 			enabled: false
 		}		

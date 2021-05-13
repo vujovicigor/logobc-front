@@ -1,0 +1,20 @@
+{
+  "name": "logo-bc",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "svelte-kit dev",
+    "build": "svelte-kit build",
+    "preview": "svelte-kit preview"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-static": "^1.0.0-next.9",
+    "@sveltejs/kit": "next",
+    "axios": "^0.21.1",
+    "svelte": "^3.38.2"
+  },
+  "type": "module",
+  "dependencies": {
+    "@sveltejs/adapter-vercel": "next",
+    "sveltestrap": "^4.2.1"
+  }
+}

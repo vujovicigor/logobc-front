@@ -9,7 +9,7 @@
     let costs = []
     let costGet = async function(){
         loading = true
-        let [resp, err] = await fetch2('get', 'cost_get', {construction_id:$page.params.construction_id})
+        let [resp, err] = await fetch2('get', 'tracking_plan_list_get', {construction_id:$page.params.construction_id})
         loading = false
         if (resp) costs = resp.results
     } 
@@ -55,8 +55,9 @@
                             
                             <ul class="list-group list-group-flush">
                                 {#each group.activity_list as activity}
-                                    <li class="list-group-item list-group-item-action" on:click={()=>{showActivity(activity, group, object)}}>
-                                        <span>{activity.code} </span>{activity.label}
+                                    <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start" on:click={()=>{showActivity(activity, group, object)}}>
+                                        <span>{activity.code} {activity.label}</span>
+                                        <span class="badge bg-primary rounded-pill">{activity.installed_percent}%</span>
                                     </li>
                                 {/each}
                             </ul>

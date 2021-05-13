@@ -1,7 +1,20 @@
 <script>
+    import { fetch2 } from '$lib/fetch2.js';
     export let activity
     export let group
     export let object
+    let installed_quantity_for_selected_date 
+    let loading = false
+    /// tracking_installed_quantity_insert?installed_date=2021-05-13
+    async function saveIzvedenaKolicina(){
+        loading = true
+        let d = new Date()
+        
+        let obj = {...activity, installed_quantity_for_selected_date, installed_date:d.toISOString().substr(0,10)}
+        let [resp, err] = await fetch2('post', 'tracking_installed_quantity_insert', obj)
+        loading = false
+        if (resp) activity = resp.results
+    }
 </script>
 <button id="back" on:click
 class="">
@@ -23,11 +36,32 @@ contract_unit_price_total: {activity.contract_unit_price_total}<br>
 JM: {activity.unit_label}<br>
 quantity: {activity.quantity}<br>
 Installed percent {activity.installed_percent}%
-<div class="progress">
+<div class="progress mb-3">
     <div class="progress-bar bg-success" role="progressbar" style="width: {activity.installed_percent}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
 </div>    
 
 
+<div class="row mb-3">
+    <div class="col">
+        <div class="text-success">Realizovano</div>
+        <strong>{activity.installed_quantity}</strong>
+    </div>
+    <div class="col">
+        <div class="text-success">Ukupno</div>
+        <strong>{activity.quantity}</strong>
+    </div>
+    <div class="col">
+        <div class="text-success">J.m.</div>
+        <strong>{activity.unit_label}</strong>
+    </div>
+</div>
+
+
+<div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Izvedena količina</label>
+    <input type="numeric" class="form-control" id="exampleFormControlInput1" bind:value={installed_quantity_for_selected_date}>
+</div>
+<button disabled={loading} on:click={saveIzvedenaKolicina} class="btn btn-primary mb-3">Sačuvaj</button>
 <style>
     #back {
         position:fixed;

@@ -12,7 +12,7 @@
     }
 </script>
 
-<nav class="navbar fixed-top navbar-light bg-lightDUMMY" style="background-color: white !important;">
+<nav class="navbar fixed-top navbar-light bg-lightDUMMY" style="background-color: white !important; z-index: 1">
     <div class="container-fluid">
       <button on:click="{()=>{collapsed=!collapsed}}" class:collapsed class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

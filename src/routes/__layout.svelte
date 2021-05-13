@@ -1,18 +1,15 @@
 <script>
     import { goto } from '$app/navigation';
-    import { getStores, navigating, page } from '$app/stores';
+    import { navigating, page } from '$app/stores';
     import { projects } from '$lib/store/projects'
     import { session as sessionStore} from '$lib/store/session.js'
     import { browser } from '$app/env'
-    import construction_id from '$lib/store/construction_id'
 
     let collapsed = true
     $: if ($page || $navigating) collapsed = true
     $: if (browser && !$sessionStore.isLogedIn) {
         goto('/login')
     }
-   // path: "/resursi/"
-
 </script>
 
 <nav class="navbar fixed-top navbar-light bg-lightDUMMY" style="background-color: white !important;">
@@ -30,23 +27,19 @@
       </a>
       <div style="overflow: auto; height: 100vh;" class:show={!collapsed} class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
             <li class="nav-item">
-                <a class="nav-link" href="/resursi"><strong>Projekti</strong></a>
+                <a class="nav-link" href="/"><strong>Projekti</strong></a>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ps-3">
                     {#each $projects as project}
                     <li class="nav-item">
-                        <a class:active={$construction_id==project.construction_id} class="nav-link" aria-current="page" href="/project/{project.construction_id}">{project.name}</a>
+                        <a class:active={$page.params.construction_id==project.construction_id} class="nav-link" aria-current="page" href="/project/{project.construction_id}/pracenje">
+                            {project.name}
+                        </a>
                     </li>
                     {/each}
                 </ul>                
             </li>
-            <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="/">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/resursi">Resursi</a>
-            </li>      
+
             {#if $sessionStore.isLogedIn}
                 <li class="nav-item">
                     <a on:click={()=>{$sessionStore.isLogedIn=false}} class="nav-link" aria-current="page" href="#">Logout</a>
@@ -55,13 +48,8 @@
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="/login">Login</a>
                 </li>
-            {/if}
-                                          
+            {/if}                          
         </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
       </div>
     </div>
 </nav>

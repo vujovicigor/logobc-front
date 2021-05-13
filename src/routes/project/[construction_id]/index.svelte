@@ -15,6 +15,9 @@
     $: cstore.set(construction_id)		
 
 </script>
+<div class="container" style="flex: 1; overflow: auto;">
+
 opa: construction_id:{construction_id}
 <br>
 {$cstore}
+</div>

@@ -1,3 +1,8 @@
+<script>
+    export let activity
+    export let group
+    export let object
+</script>
 <button id="back" on:click
 class="">
 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
@@ -5,10 +10,24 @@ class="">
 </svg>
 </button>
 
-<div>blabalblab
-
+<div>
+    {group.code}
+    {group.label}
 </div>
-Activ details...
+<div>
+    {activity.code}
+    {activity.label}
+</div>
+contract_unit_price: {activity.contract_unit_price}<br>
+contract_unit_price_total: {activity.contract_unit_price_total}<br>
+JM: {activity.unit_label}<br>
+quantity: {activity.quantity}<br>
+Installed percent {activity.installed_percent}%
+<div class="progress">
+    <div class="progress-bar bg-success" role="progressbar" style="width: {activity.installed_percent}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+</div>    
+
+
 <style>
     #back {
         position:fixed;

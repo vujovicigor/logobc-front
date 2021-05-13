@@ -9,7 +9,7 @@
 <div class="container" style="max-width:400px !important">
     {#each $projects as project}
         <div class="card mb-4 border-0" >
-            <a href="/project/{project.construction_id}" class="stretched-link">
+            <a href="/project/{project.construction_id}/pracenje" class="stretched-link">
                 <img src="{project.image?project.image:'https://bzvz.buildcon.org/assets/img/icons/project.svg'}" class="card-img-top" alt="{project.name}">
             </a>            
             <div class="card-body">

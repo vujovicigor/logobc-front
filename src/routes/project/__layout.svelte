@@ -2,7 +2,8 @@
     import { projectsKV, projects } from '$lib/store/projects'
     import selectedDate from '$lib/store/selectedDate.js'
     import { page } from '$app/stores';
-    import Datepicker from 'svelte-calendar';
+    import Datepicker from '$lib/svelte-calendar/Datepicker.svelte';
+    let isDatepickerOpen = true
     let daysOfWeek = [
         ['Nedelja', 'Ned'],
         ['Ponedeljak', 'Pon'],
@@ -39,19 +40,17 @@
     $: if ($page?.params?.construction_id && $projectsKV)
         project = $projectsKV[ $page.params.construction_id ] || {}
 </script>
-<div class="container">
-    <div class="d-flex flex-row" style="align-items: center;">
+<div class="container" style="position:relative; overflow: visible">
+    <div class="d-flex flex-row" style="align-items: center; overflow: visible">
         <strong style="flex:1">{project?.name}</strong>
-        <div>
-            <Datepicker
-                bind:selected={$selectedDate}
-                daysOfWeek={daysOfWeek}
-                monthsOfYear={monthsOfYear}
-                start={new Date((project?.start_date) || '2020-01-01')}
-                end={new Date('2290-01-01')}
-                format={date => formatDate(date)}
-            />
-        </div>
+        <Datepicker
+            bind:selected={$selectedDate}
+            daysOfWeek={daysOfWeek}
+            monthsOfYear={monthsOfYear}
+            start={new Date((project?.start_date) || '2020-01-01')}
+            end={new Date('2290-01-01')}
+            format={date => formatDate(date)}
+        />
 
     </div>    
 </div>

@@ -14,7 +14,7 @@
 
 <nav class="navbar fixed-top navbar-light bg-lightDUMMY" style="background-color: white !important; z-index: 1">
     <div class="container-fluid">
-      <button on:click="{()=>{collapsed=!collapsed}}" class:collapsed class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button style="border: none" on:click="{()=>{collapsed=!collapsed}}" class:collapsed class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <a class="navbar-brand" href="/">
@@ -54,3 +54,10 @@
     </div>
 </nav>
 <slot></slot>
+<style>
+:global(.navbar-toggler:focus){
+    text-decoration: none;
+    outline: 0;
+    box-shadow: none !important;
+}
+</style>

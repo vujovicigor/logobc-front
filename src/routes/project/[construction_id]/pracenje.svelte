@@ -2,7 +2,8 @@
     import { fetch2 } from '$lib/fetch2.js';
     import { page } from '$app/stores';
     import ActivityDetails from '$lib/ActivityDetails.svelte'
-
+    import Loader from '$lib/Loader.svelte'
+    
     let showActivityDetails = false
     let activity, group, object 
     let loading = false
@@ -28,11 +29,7 @@
 <div class="container" style="flex: 1; overflow: auto;">
 
 {#if loading}
-    <div class="text-center">
-        <div class="spinner-border" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-    </div>
+    <Loader/>
 {:else}
 
     {#if showActivityDetails}

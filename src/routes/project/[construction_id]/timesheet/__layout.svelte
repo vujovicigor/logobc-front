@@ -6,9 +6,9 @@
     }    
 </script>
 <div class="container">
-    <ul class="nav nav-pills nav-fill mb-2">
+    <ul class="nav nav-tabs nav-fill mb-2" style="font-size: 0.7rem!important;">
         <li class="nav-item">
-        <a class:active={pagename == 'ljudski'} class="nav-link" aria-current="page" href="/project/{$page.params.construction_id}/timesheet/ljudski">Ljudski</a>
+        <a class:active={pagename == 'ljudski'} class="nav-link" aria-current="page" href="/project/{$page.params.construction_id}/timesheet/ljudski">Ljudski resursi</a>
         </li>
         <li class="nav-item">
         <a class:active={pagename == 'vozila'} class="nav-link" href="/project/{$page.params.construction_id}/timesheet/vozila">Vozila</a>
@@ -22,3 +22,8 @@
     </ul>
 </div>  
 <slot></slot>
+<style>
+    :global(.nav-link){
+        padding:0.5rem !important;
+    }
+</style>

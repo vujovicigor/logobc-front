@@ -3,13 +3,14 @@
     import { page } from '$app/stores';
     import selectedDate from '$lib/store/selectedDate.js'
     import Loader from '$lib/Loader.svelte'
+    import getISODatePartFromDate from '$lib/getISODatePartFromDate'
 
     let selected_member_ix = 0 
     let loading = false
     let ljudi = []
     let ljudiGet = async function(){
         loading = true
-        let [resp, err] = await fetch2('get', 'timesheet_machine_get', {selected_date:$selectedDate.toISOString(), construction_id:$page.params.construction_id})
+        let [resp, err] = await fetch2('get', 'timesheet_machine_get', {selected_date:getISODatePartFromDate($selectedDate), construction_id:$page.params.construction_id})
         loading = false
         if (resp) {
             selected_member_ix = 0 

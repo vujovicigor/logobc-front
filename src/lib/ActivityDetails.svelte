@@ -44,11 +44,11 @@ Installed percent {activity.installed_percent}%
 <div class="row mb-3">
     <div class="col">
         <div class="text-success">Realizovano</div>
-        <strong>{activity.installed_quantity}</strong>
+        <strong>{activity.quantity_installed}</strong>
     </div>
     <div class="col">
         <div class="text-success">Ukupno</div>
-        <strong>{activity.quantity}</strong>
+        <strong>{activity.quantity_actual}</strong>
     </div>
     <div class="col">
         <div class="text-success">J.m.</div>

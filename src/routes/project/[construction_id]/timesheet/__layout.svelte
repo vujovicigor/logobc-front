@@ -2,13 +2,14 @@
     import { page } from '$app/stores';
     let pagename
     $: if ($page && $page.path){
-        pagename = $page.path.split('/').pop()
+//        pagename = $page.path.split('/').pop()
+        pagename = $page.path.split('/')[4]
     }    
 </script>
 <div class="container">
     <ul class="nav nav-tabs nav-fill mb-2" style="font-size: 0.7rem!important;">
         <li class="nav-item">
-        <a sveltekit:prefetch class:active={pagename == 'ljudski'} class="nav-link" aria-current="page" href="/project/{$page.params.construction_id}/timesheet/ljudski">Ljudski resursi</a>
+        <a sveltekit:prefetch class:active={pagename == 'ljudski'} class="nav-link" aria-current="page" href="/project/{$page.params.construction_id}/timesheet/ljudski/radnik">Ljudski resursi</a>
         </li>
         <li class="nav-item">
         <a sveltekit:prefetch class:active={pagename == 'vozila'} class="nav-link" href="/project/{$page.params.construction_id}/timesheet/vozila">Vozila</a>
